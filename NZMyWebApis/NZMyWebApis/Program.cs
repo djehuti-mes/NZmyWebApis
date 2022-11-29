@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NZMyWebApis.Data;
+using NZMyWebApis.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +10,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Injetc dbContext
 builder.Services.AddDbContext<NZApiDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWebApiDb"));
 });
+//Inject Repository
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+//Inject profile
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
