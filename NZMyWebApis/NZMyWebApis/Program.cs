@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Injetc dbContext
+//Inject dbContext
 builder.Services.AddDbContext<NZApiDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWebApiDb"));
